@@ -32,20 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (q.type === "radio") {
             q.options.forEach(opt => {
-                inputHTML += `<label><input type="radio" name="${q.name}" value="${opt}"> ${opt}</label>`;
+                const isChecked = answers[q.name] === opt ? 'checked' : '';
+                inputHTML += `<label><input type="radio" name="${q.name}" value="${opt}" ${isChecked}> ${opt}</label>`;
             });
         } else if (q.type === "select") {
             inputHTML += `<select name="${q.name}"><option value="">Select...</option>`;
             q.options.forEach(opt => {
-                inputHTML += `<option value="${opt}">${opt}</option>`;
+                const isSelected = answers[q.name] === opt ? 'selected' : '';
+                inputHTML += `<option value="${opt}" ${isSelected}>${opt}</option>`;
             });
             inputHTML += `</select>`;
         } else if (q.type === "checkbox") {
+            const selectedValues = answers[q.name] ? answers[q.name].split(', ') : [];
             q.options.forEach(opt => {
-                inputHTML += `<label><input type="checkbox" name="${q.name}" value="${opt}"> ${opt}</label>`;
+                const isChecked = selectedValues.includes(opt) ? 'checked' : '';
+                inputHTML += `<label><input type="checkbox" name="${q.name}" value="${opt}" ${isChecked}> ${opt}</label>`;
             });
         } else if (q.type === "textarea") {
-            inputHTML += `<textarea name="${q.name}"></textarea>`;
+            const value = answers[q.name] || '';
+            inputHTML += `<textarea name="${q.name}">${value}</textarea>`;
         }
 
         formContent.innerHTML = `
