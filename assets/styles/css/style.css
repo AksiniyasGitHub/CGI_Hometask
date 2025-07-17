@@ -236,7 +236,7 @@ body {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background-color: var(--orange);
+    background-color: #335BB1;
     color: var(--white);
     text-align: center;
     line-height: 18px;
@@ -249,18 +249,32 @@ body {
 .tooltip .tooltip-text {
     visibility: hidden;
     width: 220px;
-    background-color: #333333;
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--text-default);
     text-align: center;
     border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 8px;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
+    bottom: calc(125% + 3px);
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s;
+    font-weight: normal;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--white) transparent transparent transparent;
+    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.05));
 }
 
 .tooltip:hover .tooltip-text {
