@@ -112,7 +112,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const label = q.summary || q.question.replace(/<[^>]*>/g, '');
             summaryHTML += `<li>${label} <i>${answers[q.name]}</i></li>`;
         });
-        summaryHTML += '</ul><button class="btn" style="margin-top: 40px;" onclick="location.reload()">Start over</button>';
+        summaryHTML += `
+        </ul>
+        <div style="margin-top: 40px; display: flex; justify-content: space-between;">
+            <button type="button" class="btn prev-btn-summary">Previous</button>
+            <button class="btn" onclick="location.reload()">Start over</button>
+        </div>
+    `;
         formContent.innerHTML = summaryHTML;
+
+        const prevBtnSummary = formContent.querySelector('.prev-btn-summary');
+        if (prevBtnSummary) {
+            prevBtnSummary.addEventListener('click', () => {
+                currentStep = questions.length - 1;
+                renderQuestion(currentStep);
+            });
+        }
     }
 });
